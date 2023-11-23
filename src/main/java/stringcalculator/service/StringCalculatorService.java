@@ -1,7 +1,5 @@
 package stringcalculator.service;
 
-import stringcalculator.exception.InvalidOperatorException;
-import stringcalculator.util.StringCalculator;
 import stringcalculator.util.StringUtility;
 
 public class StringCalculatorService {
@@ -23,20 +21,8 @@ public class StringCalculatorService {
         return result;
     }
 
-    private static int calculateDependsOnOperator(int num1, String operator, int num2) {
-        if (operator.equals(Operator.ADD.getOperator())) {
-            return StringCalculator.add(num1, num2);
-        }
-        if (operator.equals(Operator.SUB.getOperator())) {
-            return StringCalculator.subtract(num1, num2);
-        }
-        if (operator.equals(Operator.MUL.getOperator())) {
-            return StringCalculator.multiply(num1, num2);
-        }
-        if (operator.equals(Operator.DIV.getOperator())) {
-            return StringCalculator.divide(num1, num2);
-        }
-
-        throw new InvalidOperatorException(operator);
+    private static int calculateDependsOnOperator(int num1, String symbol, int num2) {
+        Operator operator = Operator.findOperator(symbol);
+        return operator.calculate(num1, num2);
     }
 }
