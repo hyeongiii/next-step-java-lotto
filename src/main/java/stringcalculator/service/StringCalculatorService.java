@@ -1,5 +1,6 @@
 package stringcalculator.service;
 
+import stringcalculator.exception.InvalidOperatorException;
 import stringcalculator.util.StringCalculator;
 import stringcalculator.util.StringUtility;
 
@@ -36,6 +37,6 @@ public class StringCalculatorService {
             return StringCalculator.divide(num1, num2);
         }
 
-        return 0;
+        throw new InvalidOperatorException(operator);
     }
 }
