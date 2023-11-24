@@ -1,20 +1,20 @@
 package stringcalculator.util;
 
+import stringcalculator.exception.BlankStringException;
 import stringcalculator.exception.InvalidOperatorException;
 
 public class StringUtility {
-    private final static String EXCEPTION_MESSAGE_BLANK_INPUT = "입력값이 빈 값이거나 공백으로만 이뤄졌습니다.";
     private final static String SEPARATOR = " ";
     private final static String LEGAL_OPERATOR = "+-*/";
 
     public static void validateBlankString(String input) {
         if (blankString(input)) {
-            throw new IllegalArgumentException(EXCEPTION_MESSAGE_BLANK_INPUT);
+            throw new BlankStringException();
         }
     }
 
     private static boolean blankString(String input) {
-        return input.isBlank();
+        return input == null || input.isBlank();
     }
 
     public static String[] split(String str) {

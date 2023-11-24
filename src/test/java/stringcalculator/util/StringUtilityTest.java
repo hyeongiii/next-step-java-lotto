@@ -3,7 +3,8 @@ package stringcalculator.util;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import stringcalculator.exception.BlankStringException;
 import stringcalculator.exception.InvalidOperatorException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,9 +14,9 @@ public class StringUtilityTest {
 
     @ParameterizedTest
     @DisplayName("입력값이 null 이거나 빈 문자열일 경우 예외를 발생시킨다.")
-    @ValueSource(strings = {"", "    "})
+    @NullAndEmptySource
     void validateBlankString(String value) {
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(BlankStringException.class)
                 .isThrownBy(() -> StringUtility.validateBlankString(value));
     }
 
