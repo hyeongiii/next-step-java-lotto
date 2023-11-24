@@ -1,4 +1,4 @@
-package stringcalculator.util;
+package stringcalculator.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,32 +10,27 @@ import stringcalculator.exception.InvalidOperatorException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class StringUtilityTest {
-
+public class ParserTest {
     @ParameterizedTest
     @DisplayName("입력값이 null 이거나 빈 문자열일 경우 예외를 발생시킨다.")
     @NullAndEmptySource
     void validateBlankString(String value) {
         assertThatExceptionOfType(BlankStringException.class)
-                .isThrownBy(() -> StringUtility.validateBlankString(value));
-    }
-
-    @Test
-    @DisplayName("입력 값을 공백을 기준으로 자른다.")
-    void split() {
-        assertThat(StringUtility.split("1 + 2 * 3")).containsExactly("1", "+", "2", "*", "3");
+                .isThrownBy(() -> new Parser(value));
     }
 
     @Test
     @DisplayName("입력된 연산자가 올바르지 않을 경우 예외를 발생시킨다.")
     void validateOperator() {
+        Parser parser = new Parser("1 + 2 ( 4");
+
         assertThatExceptionOfType(InvalidOperatorException.class)
-                .isThrownBy(() -> StringUtility.validateOperator(new String[] {"1", "+", "2", "(", "4"}));
+                .isThrownBy(parser::validateOperator);
     }
 
     @Test
     @DisplayName("문자열을 숫자로 형변환한다.")
     void convertToInt() {
-        assertThat(StringUtility.convertToInt("3")).isEqualTo(3);
+        assertThat(Parser.convertToInt("3")).isEqualTo(3);
     }
 }
