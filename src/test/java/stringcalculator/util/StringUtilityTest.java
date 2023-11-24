@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import stringcalculator.exception.InvalidOperatorException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -27,7 +28,7 @@ public class StringUtilityTest {
     @Test
     @DisplayName("입력된 연산자가 올바르지 않을 경우 예외를 발생시킨다.")
     void validateOperator() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(InvalidOperatorException.class)
                 .isThrownBy(() -> StringUtility.validateOperator(new String[] {"1", "+", "2", "(", "4"}));
     }
 

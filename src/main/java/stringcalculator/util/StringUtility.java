@@ -1,8 +1,9 @@
 package stringcalculator.util;
 
+import stringcalculator.exception.InvalidOperatorException;
+
 public class StringUtility {
     private final static String EXCEPTION_MESSAGE_BLANK_INPUT = "입력값이 빈 값이거나 공백으로만 이뤄졌습니다.";
-    private final static String EXCEPTION_MESSAGE_ILLEGAL_OPERATION = "입력된 기호가 올바르지 않습니다.";
     private final static String SEPARATOR = " ";
     private final static String LEGAL_OPERATOR = "+-*/";
 
@@ -28,7 +29,7 @@ public class StringUtility {
 
     private static void illegalOperator(String operator) {
         if (!LEGAL_OPERATOR.contains(operator)) {
-            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_OPERATION);
+            throw new InvalidOperatorException(operator);
         }
     }
 
